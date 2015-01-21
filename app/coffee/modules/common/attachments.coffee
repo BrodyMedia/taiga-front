@@ -267,8 +267,10 @@ AttachmentDirective = ($template) ->
                 html = template(ctx)
 
             $el.html(html)
+
             if attachment.is_deprecated
                 $el.addClass("deprecated")
+                $el.find("input:checkbox").prop('checked', true)
 
         saveAttachment = ->
             attachment.description = $el.find("input[name='description']").val()
