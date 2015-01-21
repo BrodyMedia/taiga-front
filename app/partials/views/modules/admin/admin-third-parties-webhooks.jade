@@ -42,7 +42,7 @@ block content
                                 a(href="", title="Test history") (See test history)
                             div.webhook-options
                                 div.webhook-options-wrapper
-                                    a.icon.icon-floppy(href="", title="Save Webhook")
+                                    a.icon.icon-check-square(href="", title="Test Webhook")
                                     a.icon.icon-edit(href="", title="Edit Webhook")
                                     a.icon.icon-delete(href="", title="Delete Webhook")
                     div.single-webhook-wrapper
@@ -54,40 +54,41 @@ block content
                                 a(href="", title="Test history") (See test history)
                             div.webhook-options
                                 div.webhook-options-wrapper
-                                    a.icon.icon-floppy(href="", title="Save Webhook")
+                                    a.icon.icon-check-square(href="", title="Test Webhook")
                                     a.icon.icon-edit(href="", title="Edit Webhook")
                                     a.icon.icon-delete(href="", title="Delete Webhook")
+
                         div.webhooks-history
-                            div.history-single
-                                div
-                                    span.history-response.history-success
-                                    span.history-date Just now
-                                span.icon.icon-arrow-bottom
-                            div.history-single
-                                div
-                                    span.history-response.history-error
-                                    span.history-date Just now
-                                span.icon.icon-arrow-bottom
-
-        //
-            form
-                fieldset
-                    label(for="secret-key") Secret key
-                    input(type="text", name="secret-key", ng-model="github.secret", placeholder="Secret key", id="secret-key")
-
-                fieldset
-                    .select-input-text(tg-select-input-text)
-                        div
-                            label(for="payload-url") Payload URL
-                            .field-with-option
-                                input(type="text", ng-model="github.webhooks_url", name="payload-url", readonly="readonly", placeholder="Payload URL", id="payload-url")
-                                .option-wrapper.select-input-content
-                                    .icon.icon-copy
-                            .help-copy Copy to clipboard: Ctrl+C
-
-                button(type="submit", class="hidden")
-                a.button.button-green.submit-button(href="", title="Save") Save
-
+                            div.history-single-wrapper
+                                div.history-single
+                                    div
+                                        span.history-response-icon.history-success
+                                        span.history-date Just now
+                                    span.icon.icon-arrow-bottom
+                            div.history-single-wrapper
+                                div.history-single.history-single-open
+                                    div
+                                        span.history-response-icon.history-error
+                                        span.history-date Just now
+                                    span.icon.icon-arrow-bottom
+                                div.history-single-response
+                                    div.history-single-request-header
+                                        span Request
+                                        a(href="", title="Resend request")
+                                            span.icon.icon-reload
+                                            span Resend request
+                                    div.history-single-request-body
+                                        div.response-container
+                                            span.response-title Headers
+                                            textarea(name="headers")
+                                        div.response-container
+                                            span.response-title Playload
+                                            textarea(name="Playload")
+                                    div.history-single-response-header
+                                        span Response
+                                    div.history-single-response-body
+                                        div.response-container
+                                            textarea(name="headers")
 
             a.help-button(href="https://taiga.io/support/github-integration/", target="_blank")
                 span.icon.icon-help
