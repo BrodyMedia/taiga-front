@@ -102,6 +102,7 @@ paths.js = [
     paths.app + "vendor/markitup-1x/markitup/jquery.markitup.js",
     paths.app + "vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
     paths.app + "vendor/raven-js/dist/raven.js",
+    paths.app + "vendor/l.js/l.js",
     paths.app + "js/jquery.ui.git-custom.js",
     paths.app + "js/jquery-ui.drag-multiple-custom.js",
     paths.app + "js/sha1-custom.js",
@@ -204,8 +205,12 @@ gulp.task "styles", ["delete-tmp-styles"], ->
 ##############################################################################
 
 gulp.task "conf", ->
-    gulp.src("conf/conf.example.js")
-        .pipe(rename("conf.js"))
+    gulp.src(["conf/defaultConf.json", "conf/conf.example.json"])
+        .pipe(gulp.dest(paths.dist + "js/"))
+
+gulp.task "loader", ->
+    gulp.src("loader/loader.coffee")
+        .pipe(coffee())
         .pipe(gulp.dest(paths.dist + "js/"))
 
 gulp.task "locales", ->
@@ -236,7 +241,7 @@ gulp.task "jslibs-deploy", ->
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(paths.dist + "js/"))
 
-gulp.task "app-watch", ["coffee", "conf", "locales"], ->
+gulp.task "app-watch", ["coffee", "conf", "locales", "loader"], ->
     _paths = [
         paths.tmp + "app.js",
         paths.tmp + "locales.en.js"
@@ -246,7 +251,7 @@ gulp.task "app-watch", ["coffee", "conf", "locales"], ->
         .pipe(concat("app.js"))
         .pipe(gulp.dest(paths.dist + "js/"))
 
-gulp.task "app-deploy", ["coffee", "conf", "locales"], ->
+gulp.task "app-deploy", ["coffee", "conf", "locales", "loader"], ->
     _paths = [
         paths.tmp + "app.js",
         paths.tmp + "locales.en.js"
